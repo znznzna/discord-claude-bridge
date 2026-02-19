@@ -175,7 +175,7 @@ describe("ClaudeBridge", () => {
       expect(callArgs.options?.abortController).toBe(ac);
     });
 
-    it("should resume a session when sessionId is provided", async () => {
+    it("should set continue:true when sessionId is provided", async () => {
       const resultMsg = {
         type: "result" as const,
         subtype: "success" as const,
@@ -206,7 +206,8 @@ describe("ClaudeBridge", () => {
       await bridge.execute("continue", { sessionId: "existing-session" });
 
       const callArgs = vi.mocked(mockQuery).mock.calls[0][0];
-      expect(callArgs.options?.resume).toBe("existing-session");
+      expect(callArgs.options?.continue).toBe(true);
+      expect(callArgs.options?.resume).toBeUndefined();
     });
   });
 });

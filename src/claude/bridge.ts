@@ -57,9 +57,8 @@ export class ClaudeBridge {
           cwd: this.options.cwd,
           permissionMode: this.options.permissionMode as PermissionMode,
           abortController: ac,
-          resume: execOpts.sessionId,
+          continue: !!execOpts.sessionId,
           settingSources: ["user", "project", "local"] as SettingSource[],
-          persistSession: true,
           systemPrompt: {
             type: "preset",
             preset: "claude_code",
