@@ -5,3 +5,7 @@ dist/
 .DS_Store
 coverage/
 .worktrees/
+config/config.yaml
+HANDOVER*.md
+com.*.plist
+logs/

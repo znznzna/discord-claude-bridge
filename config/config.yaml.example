@@ -2,10 +2,10 @@ discord:
   guildId: "YOUR_GUILD_ID"
 
 channels:
-  # "CHANNEL_ID":
-  #   directory: "/path/to/project"
-  #   permissionMode: "acceptEdits"
-  #   description: "Project description"
+  "YOUR_CHANNEL_ID":
+    directory: "/path/to/your/project"
+    permissionMode: "acceptEdits"
+    description: "Project description"
 
 toolPolicy:
   autoApprove: [Read, Glob, Grep, WebSearch, WebFetch]
@@ -20,4 +20,4 @@ output:
 
 logging:
   level: "info"
-  # file: "~/.local/share/discord-claude-bridge/app.log"
+  # file: "/path/to/app.log"
