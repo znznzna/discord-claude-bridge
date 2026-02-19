@@ -7,6 +7,7 @@ set -e
 
 INSTALL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 NODE_PATH="$(which node)"
+NODE_DIR="$(dirname "$NODE_PATH")"
 PLIST_DEST="$HOME/Library/LaunchAgents/com.discord-claude-bridge.plist"
 
 echo "=== Discord Claude Bridge LaunchAgent セットアップ ==="
@@ -17,6 +18,7 @@ echo "nodeパス: $NODE_PATH"
 sed \
   -e "s|__INSTALL_DIR__|$INSTALL_DIR|g" \
   -e "s|__NODE_PATH__|$NODE_PATH|g" \
+  -e "s|__NODE_DIR__|$NODE_DIR|g" \
   "$INSTALL_DIR/com.discord-claude-bridge.plist.template" \
   > "$INSTALL_DIR/com.discord-claude-bridge.plist"
 

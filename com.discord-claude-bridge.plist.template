@@ -20,6 +20,8 @@
         <string>production</string>
         <key>CONFIG_PATH</key>
         <string>__INSTALL_DIR__/config/config.yaml</string>
+        <key>PATH</key>
+        <string>__NODE_DIR__:/usr/local/bin:/usr/bin:/bin</string>
     </dict>
 
     <key>RunAtLoad</key>
