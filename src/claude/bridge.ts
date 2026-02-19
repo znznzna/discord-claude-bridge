@@ -1,5 +1,5 @@
 import { query } from "@anthropic-ai/claude-agent-sdk";
-import type { SDKMessage, PermissionMode } from "@anthropic-ai/claude-agent-sdk";
+import type { SDKMessage, PermissionMode, SettingSource } from "@anthropic-ai/claude-agent-sdk";
 import { OutputFilter, type OutputChunk } from "./output-filter.js";
 import { classifyTool, ToolAction } from "./tool-policy.js";
 import { ClaudeBridgeError } from "../lib/errors.js";
@@ -56,6 +56,7 @@ export class ClaudeBridge {
           permissionMode: this.options.permissionMode as PermissionMode,
           abortController: ac,
           resume: execOpts.sessionId,
+          settingSources: ["user", "project", "local"] as SettingSource[],
           systemPrompt: {
             type: "preset",
             preset: "claude_code",
