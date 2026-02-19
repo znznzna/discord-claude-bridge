@@ -82,6 +82,7 @@ async function processMessage(
     permissionMode: session.permissionMode,
     toolPolicy: config.toolPolicy,
     showToolSummary: config.output.showToolSummary,
+    logger,
   });
 
   // Buffer for batching messages

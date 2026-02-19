@@ -4,12 +4,14 @@ import { OutputFilter, type OutputChunk } from "./output-filter.js";
 import { classifyTool, ToolAction } from "./tool-policy.js";
 import { ClaudeBridgeError } from "../lib/errors.js";
 import type { ToolPolicyConfig, PermissionModeValue } from "../config/types.js";
+import type { Logger } from "pino";
 
 export interface ClaudeBridgeOptions {
   cwd: string;
   permissionMode: PermissionModeValue;
   toolPolicy: ToolPolicyConfig;
   showToolSummary: boolean;
+  logger: Logger;
 }
 
 export interface ExecuteOptions {
@@ -66,6 +68,9 @@ export class ClaudeBridge {
             preset: "claude_code",
           },
           canUseTool: this.createCanUseTool(execOpts),
+          stderr: (data: string) => {
+            this.options.logger.warn({ stderr: data.trimEnd() }, "Claude CLI stderr");
+          },
         },
       });
 
