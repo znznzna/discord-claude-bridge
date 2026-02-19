@@ -1,4 +1,5 @@
 import { config as dotenvConfig } from "dotenv";
+import { watch } from "node:fs";
 import { resolve } from "node:path";
 import { createLogger } from "./lib/logger.js";
 import { ConfigLoader } from "./config/loader.js";
@@ -62,6 +63,22 @@ async function main(): Promise<void> {
     } catch (err) {
       logger.error({ err }, "Failed to reload config");
     }
+  });
+
+  // Config hot-reload via file watch
+  let reloadTimer: NodeJS.Timeout | null = null;
+  watch(configPath, () => {
+    if (reloadTimer) clearTimeout(reloadTimer);
+    reloadTimer = setTimeout(() => {
+      logger.info("Config file changed, reloading...");
+      try {
+        const newConfig = configLoader.reload();
+        discordClient.updateConfig(newConfig);
+        logger.info("Config reloaded successfully");
+      } catch (err) {
+        logger.error({ err }, "Failed to reload config");
+      }
+    }, 300);
   });
 
   // Start
