@@ -56,13 +56,7 @@ export class OutputFilter {
     msg: Extract<SDKMessage, { type: "result" }>,
   ): OutputChunk[] {
     if (msg.subtype === "success") {
-      const resultMsg = msg as Extract<
-        SDKMessage,
-        { type: "result"; subtype: "success" }
-      >;
-      if (resultMsg.result && resultMsg.result.trim().length > 0) {
-        return [{ type: "result", content: resultMsg.result }];
-      }
+      // Text content was already emitted via assistant messages; skip to avoid duplicates
       return [];
     }
 

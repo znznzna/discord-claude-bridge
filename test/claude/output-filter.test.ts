@@ -77,9 +77,8 @@ describe("OutputFilter", () => {
       };
 
       const chunks = filter.processMessage(msg as SDKMessage);
-      expect(chunks).toHaveLength(1);
-      expect(chunks[0].type).toBe("result");
-      expect(chunks[0].content).toContain("Task completed successfully");
+      // success result emits no chunks (text was already sent via assistant messages)
+      expect(chunks).toHaveLength(0);
     });
 
     it("should extract errors from error result messages", () => {
