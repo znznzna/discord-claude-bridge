@@ -32,6 +32,6 @@ export const configSchema = z.object({
   }),
   channels: z.record(z.string(), channelConfigSchema).default({}),
   toolPolicy: toolPolicySchema,
-  output: outputSchema.default({}),
-  logging: loggingSchema.default({}),
+  output: outputSchema.default({ streamingIntervalMs: 1500, showStreamingUpdates: true, showToolSummary: true }),
+  logging: loggingSchema.default({ level: "info" }),
 });
