@@ -59,6 +59,7 @@ export class ClaudeBridge {
           abortController: ac,
           resume: execOpts.sessionId,
           settingSources: ["user", "project", "local"] as SettingSource[],
+          persistSession: true,
           systemPrompt: {
             type: "preset",
             preset: "claude_code",
